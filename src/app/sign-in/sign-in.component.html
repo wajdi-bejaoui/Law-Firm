@@ -1,0 +1,47 @@
+<app-banner banner="Sign In"></app-banner>
+
+<div class="container">
+    <h1 class="form-title">SIGN IN</h1>
+    <form action="#" [formGroup]="FormInput">
+      <div class="main-user-info">
+       
+        
+        <div class="user-input-box">
+          <label for="email">Email</label>
+          <input type="email"
+                  id="email"
+                  name="email" formControlName="email"
+                  placeholder="Enter Email"/>
+                  <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['email'].hasError('required')">
+                    Email address is required.                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" *ngIf="FormInput.controls['email'].hasError('email')">
+                    Please enter a valid email address.                    
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+        </div>
+       
+        <div class="user-input-box" id="passwordd">
+          <label for="password">Password</label>
+          <input type="password"
+                  id="password"
+                  name="password"
+                  formControlName="password"
+                  placeholder="Enter Password"/>
+                 
+                  <div class="alert alert-warning alert-dismissible fade show" *ngIf="FormInput.controls['password'].hasError('minlength')">
+                    The password must be at least 8 characters long.                    
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" *ngIf="FormInput.controls['password'].hasError('pattern')">
+                    The password must include at least one uppercase letter, one lowercase letter, one number, and one special character.                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>  
+                </div>
+        </div>
+       
+      </div>
+     
+      <div class="form-submit-btn">
+        <input type="submit" value="SIGN IN">
+      </div>
+    </form>
+  </div>

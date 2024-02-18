@@ -1,0 +1,25 @@
+<section class="section-50 section-md-75 section-xl-100" >
+    <div class="container" >
+      <h3 class="text-center">Latest News</h3>
+      
+        <div class="col-sm-9 col-md-6 col-lg-4 col-xl-3" *ngFor="let l of Lates">
+          <article class="post-boxed">
+            <div class="post-boxed-image"><img src="assets/images/home-6-268x182.jpg" alt="" width="268" height="182"/>
+            </div>
+            <div class="post-boxed-body" >
+              <div class="post-boxed-title"><a href="#">{{l.title}}</a></div>
+              <div class="post-boxed-footer">
+                <ul class="post-boxed-meta">
+                  <li>
+                    <time datetime="2019-06-20">{{l.Date}}</time>
+                  </li>
+                  <li><span>by</span><a href="#">{{l.admin}}</a></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+       
+      </div>
+
+  </section>
