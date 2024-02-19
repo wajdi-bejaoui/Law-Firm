@@ -1,6 +1,41 @@
-.thumbnail thumbnail-variant-2{
-    display:flex;
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
+/* Apply flexbox to the parent container */
+.block-wrap-1 {
+    margin-left: 40rem;
+}
+
+/* Style for the first column with lawyers */
+.thumbnail-variant-2-wrap {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+    align-items: center; /*
+    /* Add any styles specific to this column */
+}
+
+/* Style for the second column with the block-wrap-1 */
+.col-lg-3.text-center {
+    /* Add any styles specific to this column */
+}
+
+/* Additional styling for the thumbnail and its inner elements */
+.thumbnail-variant-2 {
+    display: flex;
+    flex-direction: column; /* Adjust as needed */
+    align-items: center; /* Adjust as needed */
+    text-align: center; /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.thumbnail-inner {
+    /* Add any styles for the inner div within the thumbnail */
+}
+
+.thumbnail-caption {
+    /* Add any styles for the caption div within the thumbnail */
+}
+
+/* Adjust styles for responsiveness as needed */
+@media (max-width: 767px) {
+    .section-60 {
+        flex-direction: column; /* Change to column layout on smaller screens */
+    }
 }

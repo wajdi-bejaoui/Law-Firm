@@ -1,0 +1,15 @@
+.container {
+
+    display: flex;
+    flex-wrap: wrap; /* Pour gérer le passage à la ligne des éléments si nécessaire */
+    justify-content: space-around; /* Ajustez cela selon vos besoins pour l'espacement horizontal */
+  }
+  .post-boxed {
+    margin: 15px; /* Ajustez cela selon vos besoins pour l'espacement entre les articles */
+  }
+  
+  .post-boxed-image img {
+    width: 100%; /* Pour que l'image remplisse la largeur de son conteneur */
+    height: auto; /* Pour maintenir le rapport hauteur/largeur de l'image */
+  }
+    
