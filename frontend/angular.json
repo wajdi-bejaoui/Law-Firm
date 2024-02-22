@@ -31,6 +31,7 @@
               "src/assets/css/style.css"
              
           ],
+         
           
           "scripts": [
             "src/assets/js/core.min.js",
@@ -41,7 +42,9 @@
         ]
         
           },
+          
           "configurations": {
+            
             "production": {
               "budgets": [
                 {
@@ -86,6 +89,7 @@
             "browserTarget": "ProjectLawExpert:build"
           }
         },
+        
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -104,9 +108,12 @@
               "src/styles.css"
             ],
             "scripts": []
+            
           }
         }
       }
     }
   }
+  
 }
+

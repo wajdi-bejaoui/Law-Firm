@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../Services/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -11,11 +14,11 @@ FormInput!:FormGroup;
 password1: string = '';
 password2: string = '';
 imagePreview: any;
-  constructor( private FB:FormBuilder){}
+  constructor( private FB:FormBuilder, private userservice: UserService){}
 ngOnInit(): void {
   this.FormInput = this.FB.group({
     fullName:['',[Validators.required,Validators.minLength(3)]],
-    Username:['',[Validators.required,Validators.minLength(3)]],
+    userName:['',[Validators.required,Validators.minLength(3)]],
     email:['',[Validators.required,Validators.email]],
     phoneNumber:['',[  Validators.required,
       Validators.pattern(/^\+(?:[0-9] ?){6,14}[0-9]$/)]],
@@ -45,8 +48,14 @@ passwordMatchValidator() {
     return { passwordMismatch: true };
   }
 }
-signup(){
-  console.log("sign up complet", this.FormInput.value);
+signup( ){
+  console.log("hhh",this.FormInput.value)
+
+ this.userservice.signup(this.FormInput.value).subscribe(
+  (data:any)=>{
+    console.log('sign up succsefull',data)
+  }
+ )
 
 }
 onImageSelected(event: Event) {

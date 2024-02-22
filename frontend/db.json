@@ -1,0 +1,129 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "name": "yyyyy",
+      "email": "hjeijinabil22@gmail.com",
+      "pass": "rr",
+      "c_pass": "rr",
+      "id": 2
+    },
+    {
+      "name": "rrr",
+      "email": "er@gamil.com",
+      "pass": "rrr",
+      "c_pass": "rrr",
+      "id": 3
+    },
+    {
+      "name": "rrr",
+      "email": "er@gamil.com",
+      "pass": "rrr",
+      "c_pass": "rrr",
+      "id": 4
+    },
+    {
+      "name": "Nabil Hjeiji",
+      "email": "nabil.hjeiji@tek-up.de",
+      "pass": "hhh",
+      "c_pass": "hhh",
+      "id": 5
+    },
+    {
+      "name": "eeee",
+      "email": "nabilhjeiji@gmail.com",
+      "pass": "eeee",
+      "c_pass": "eeee",
+      "id": 6
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "email": "hamma@gmail.com",
+      "password": "$2a$10$VKzm5WxmR352.CGgTKZL2e/vIzP.7c70oX9i/FlUXemZCfejibdMy",
+      "fullName": "hama",
+      "confirmPassword": "123456789",
+      "id": 7,
+      "username": "ffff",
+      "gender": "female",
+      "phoneNumber": "27741552"
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azerty123@",
+      "confirmPassword": "Azerty123@",
+      "gender": "male",
+      "id": 8
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azerty123@",
+      "confirmPassword": "Azerty123@",
+      "gender": "male",
+      "id": 9
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azerty123@",
+      "confirmPassword": "Azerty123@",
+      "gender": "male",
+      "id": 10
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azerty123@",
+      "confirmPassword": "Azerty123@",
+      "gender": "male",
+      "id": 11
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azerty123@",
+      "confirmPassword": "Azerty123@",
+      "gender": "female",
+      "id": 12
+    },
+    {
+      "fullName": "hjeiji nabilhjeiji",
+      "userName": "eeee",
+      "email": "eee@gmail",
+      "phoneNumber": "+21627741552",
+      "password": "Azz1@@@@@",
+      "confirmPassword": "Azz1@@@@@",
+      "gender": "male",
+      "id": 13
+    }
+  ],
+  "login": [
+    {}
+  ]
+}
