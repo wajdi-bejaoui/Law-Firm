@@ -37,25 +37,40 @@ const User= require("./Models/user");
 
 
 //of sign up
-app.post('/users/signup',(req,res)=>{
-    let obj = req.body;
-    
-   
-    console.log("here sign up");
-    console.log("here sign up",obj);
-bcrypt.hash(req.body.password,10).then(
-    (cryptedPwd)=>{
-        console.log("password crypted",cryptedPwd);
-        req.body.password = cryptedPwd;
-        let user = new User(req.body) ;
-        
-   user.save();
-    
-   
-   res.json({msg:"addes with succsefful" });
-    }); 
-  
+app.post('/users/signup', async (req, res) => {
+    try {
+        // Vérifiez si l'e-mail existe déjà dans la base de données
+        const existingUser = await User.findOne({ email: req.body.email });
+        if (existingUser) {
+            return res.json({ msg: 'E-mail already exists' });
+        }
+
+        let obj = req.body;
+
+        console.log("here sign up");
+        console.log("here sign up", obj);
+
+        // Hash du mot de passe
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+        // Création d'un nouvel utilisateur avec le mot de passe hashé
+        const newUser = new User({
+            email: req.body.email,
+            password: hashedPassword,
+            // ... autres champs du modèle
+        });
+
+        // Sauvegarde de l'utilisateur dans la base de données
+        await newUser.save();
+
+        res.json({ msg: 'Registered successfully' });
+    } catch (error) {
+        console.error('Error during user registration:', error);
+        res.json({ msg: 'Internal server error' });
+    }
 });
+
+
 //of login
 app.post('/users/login',(req,res)=>{
     let obj = req.body;

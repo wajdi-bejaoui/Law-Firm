@@ -13,8 +13,9 @@ export class SignUpComponent implements OnInit {
 FormInput!:FormGroup;
 password1: string = '';
 password2: string = '';
+errormsg:String="";
 imagePreview: any;
-  constructor( private FB:FormBuilder, private userservice: UserService){}
+  constructor( private FB:FormBuilder, private userservice: UserService, private route :Router){}
 ngOnInit(): void {
   this.FormInput = this.FB.group({
     fullName:['',[Validators.required,Validators.minLength(3)]],
@@ -48,16 +49,24 @@ passwordMatchValidator() {
     return { passwordMismatch: true };
   }
 }
-signup( ){
-  console.log("hhh",this.FormInput.value)
+signup() {
+  console.log("hhh", this.FormInput.value);
 
- this.userservice.signup(this.FormInput.value).subscribe(
-  (data:any)=>{
-    console.log('sign up succsefull',data)
-  }
- )
-
+  this.userservice.signup(this.FormInput.value).subscribe(
+    (data: any) => {
+      console.log('Sign up successful', data);
+      
+      // Check if the response indicates success
+      if (data.msg === 'Registered successfully') {
+        this.route.navigate(['signin']);
+      } else {
+        this.errormsg = 'Email aleardy exists';
+      }
+    },
+   
+  );
 }
+
 onImageSelected(event: Event) {
   const fileInput = event.target as HTMLInputElement;
 
