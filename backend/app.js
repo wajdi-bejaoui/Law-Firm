@@ -1,31 +1,61 @@
 //import express module
 const express = require("express");
-//creation app BE  name app
-const app = express();
+//importation
+const mongoose = require('mongoose');
 const cors = require('cors');
 const { log } = require("util");
+const bcrypt = require ("bcrypt");
+//import mongoose module
+//const mongoose = require("mongoose");
+//import body-parser module
+//const bodyParser = require("body-parser");
+
+
+
+//creation app BE  name app
+const app = express();
+app.use(express.json());
+
+
 // Enable CORS for all routes
 app.use(cors());
-app.use(express.json());
-//pour pouvoir imporet app
-module.exports = app;
-//tables des données
-let allusers=[
-    {
-        id:1, fullName:"aaa",userName:"yy", password:"123456", confirmPassword:"123456",phoneNumber:27741552, gender:"female", email:"hjeijinabil22@gmail.com"
-    }
-];
+//connection bd
+mongoose.connect('mongodb://localhost:27017/LawExpert', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Erreur de connexion à la base de données :'));
+db.once('open', () => {
+  console.log('Connexion réussie à la base de données');
+});
+//creation app BE  name app
+
+// Models Importation
+const User= require("./Models/user");
+
+
 //of sign up
 app.post('/users/signup',(req,res)=>{
     let obj = req.body;
+    
+   
     console.log("here sign up");
     console.log("here sign up",obj);
-  
-   
+bcrypt.hash(req.body.password,10).then(
+    (cryptedPwd)=>{
+        console.log("password crypted",cryptedPwd);
+        req.body.password = cryptedPwd;
+        let user = new User(req.body) ;
+        
+   user.save();
     
-    allusers.push(obj)
-    res.json({msg:"sign up succsefful" })
-})
+   
+   res.json({msg:"addes with succsefful" });
+    }); 
+  
+});
 //of login
 app.post('/users/login',(req,res)=>{
     let obj = req.body;
@@ -51,3 +81,5 @@ res.json({msg:true, Name:userObj.userName, lName:userObj.fullName}
     }
 
 })
+//exportation app
+module.exports = app;
