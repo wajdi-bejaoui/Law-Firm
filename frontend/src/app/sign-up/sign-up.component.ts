@@ -63,7 +63,16 @@ signup() {
         this.errormsg = 'Email aleardy exists';
       }
     },
-   
+    (error) => {
+      console.error('Error during signup:', error);
+      
+      // Handle specific error messages from the server
+      if (error.error && error.error.msg) {
+        this.errormsg = error.error.msg;
+      } else {
+        this.errormsg = 'An error occurred during signup. Please try again.';
+      }
+    }
   );
 }
 

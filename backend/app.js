@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { log } = require("util");
 const bcrypt = require ("bcrypt");
+const jwt = require ("jsonwebtoken");
+const session = require ("express-session");
 //import mongoose module
 //const mongoose = require("mongoose");
 //import body-parser module
@@ -30,7 +32,13 @@ db.on('error', console.error.bind(console, 'Erreur de connexion à la base de do
 db.once('open', () => {
   console.log('Connexion réussie à la base de données');
 });
-//creation app BE  name app
+// confi encodage data
+const  secretKey = "encodade data for  jwt";
+app.use(
+    session({
+        secret:secretKey,
+    })
+)
 
 // Models Importation
 const User= require("./Models/user");
@@ -71,30 +79,41 @@ app.post('/users/signup', async (req, res) => {
 });
 
 
+
 //of login
-app.post('/users/login',(req,res)=>{
-    let obj = req.body;
-    console.log("here login");
-    console.log("tttttttt",obj);
-    
+app.post('/users/login', (req, res) => {
+    let user = req.body;
 
-    let foundUser = false;
-    let userObj ;
-    for (let i = 0; i < allusers.length; i++) {
-        if (allusers[i].email == obj.email && allusers[i].password == obj.password) {
-            foundUser = true;
-            userObj = allusers[i];
-            break;
+    // Check if the email exists
+    User.findOne({ email: user.email }).then((doc) => {
+        // Email not found
+        if (!doc) {
+            return res.json({ msg: "Please check your Email" });
         }
-    }
-    
-    if(foundUser){
-res.json({msg:true, Name:userObj.userName, lName:userObj.fullName}
-    )}
-    else{
-        res.json({msg:false})
-    }
 
-})
+        // Compare passwords
+        const pwdResult = bcrypt.compareSync(user.password, doc.password);
+
+        // Passwords do not match
+        if (!pwdResult) {
+            return res.json({ msg: "Please check your Password" });
+        }
+
+        let userToSend = {
+            userName: doc.userName,
+            fullName: doc.fullName,
+            id: doc.id,
+            role: doc.role,
+            email: doc.email,
+            gender: doc.gender,
+            phoneNumber: doc.phoneNumber
+        };
+
+        const token = jwt.sign(userToSend, secretKey, { expiresIn: '1h' });
+
+        res.json({ msg: "Welcome", token: token });
+    });
+});
+
 //exportation app
 module.exports = app;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Token } from '@angular/compiler';
 
 
 @Injectable({
@@ -15,8 +16,8 @@ signup(obj:any):Observable<{msg:any}>{
   return this.httpclient.post<{msg:any}>(`${this.UserUrl}/signup`,obj);
 
 }
-login(obj:any={}): Observable<{ msg: boolean, Name: any, lName: any }> {
-  return this.httpclient.post<{ msg: boolean, Name: any, lName: any }>(`${this.UserUrl}/login`, obj);
+login(obj:any): Observable<{ msg: string, token: Token}> {
+  return this.httpclient.post<{ msg: string, token:Token }>(`${this.UserUrl}/login`, obj);
 }
 
  }
