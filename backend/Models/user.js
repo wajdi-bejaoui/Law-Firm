@@ -13,6 +13,8 @@ const userSchema = mongoose.Schema({
     
     
 });
+
+
 // create user model
 const user = mongoose.model("User", userSchema);
 // export fichier user

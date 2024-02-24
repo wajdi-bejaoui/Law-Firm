@@ -18,18 +18,23 @@
             <a class="nav-link" href="/about">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/typography">Typography</a>
+            <a class="nav-link" href="typography">Typography</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" >
             <a class="nav-link" href="contact">Contacts</a>
           </li>
           
         </ul>
-        <div class="rd-navbar-btn-wrap"><a class="button button-smaller button-primary-outline" href="/signin">Sign In</a></div>
-        <div class="rd-navbar-btn-wrap"><a class="button button-smaller button-primary-outline" href="/signup">Sign Up</a></div>
+        <div class="rd-navbar-btn-wrap" *ngIf="!isConnected()"><a class="button button-smaller button-primary-outline" href="/signin">Sign In</a></div>
+        <div class="rd-navbar-btn-wrap" *ngIf="!isConnected()"><a class="button button-smaller button-primary-outline" href="/signup">Sign Up</a></div>
+     
 
-        <div class="rd-navbar-btn-wrap"><a class="button button-smaller button-primary-outline" href="#">Appointment</a></div>
 
+        <div class="rd-navbar-btn-wrap"  *ngIf="isConnected()"><a class="button button-smaller button-primary-outline" href="#">Appointment</a></div>
+        <div class="rd-navbar-btn-wrap" *ngIf="isConnected()"><a class="button button-smaller button-primary-outline" >{{fullName}} {{userName}}</a></div>
+
+
+        <div class="rd-navbar-btn-wrap" *ngIf="isConnected()" (click)="logut()"><a class="button button-smaller button-primary-outline" >Logout</a></div>
 
       </div>
     </div>

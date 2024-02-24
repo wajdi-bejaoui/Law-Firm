@@ -65,6 +65,11 @@ app.post('/users/signup', async (req, res) => {
         const newUser = new User({
             email: req.body.email,
             password: hashedPassword,
+            userName : req.body.userName,
+            fullName : req.body.fullName,
+            phoneNumber : req.body.phoneNumber,
+            gender : req.body.gender
+
             // ... autres champs du modèle
         });
 

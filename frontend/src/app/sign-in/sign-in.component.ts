@@ -57,7 +57,7 @@ export class SignInComponent implements OnInit{
   
             // Rediriger en fonction du rôle de l'utilisateur
             if (user.role === "lawyer") {
-              this.route.navigate(['admin']); // Utiliser la route admin appropriée
+              this.route.navigate(['']); // Utiliser la route admin appropriée
             } else {
               this.route.navigate(['about']); // Utiliser la route utilisateur appropriée
             }
