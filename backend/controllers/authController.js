@@ -3,6 +3,7 @@ const bcrypt = require ("bcrypt");
 const jwt = require ("jsonwebtoken");
 const express = require("express");
 const session = require ("express-session");
+const { StatusCodes } = require('http-status-codes');
 const app = express();
 
 const register = async (req, res) => {
@@ -53,7 +54,7 @@ const login = async (req, res) => {
     let user = req.body;
 
     // Check if the email exists
-    User.findOne({ email: user.email }).then((doc) => {
+    const doc = await User.findOne({ email: user.email })
         // Email not found
         if (!doc) {
             return res.json({ msg: "Please check your Email" });
@@ -61,11 +62,11 @@ const login = async (req, res) => {
     
 
         // Compare passwords
-        const pwdResult = doc.comparePassword(user.password);
-   
+        const pwdResult = await doc.comparePassword(user.password);
         // Passwords do not match
         if (!pwdResult) {
-            return res.json({ msg: "Please check your Password" });
+            console.log("here")
+            return res.json({ msg: "Please check your Password" }).status(StatusCodes.UNAUTHORIZED);
         }
 
         let userToSend = {
@@ -82,7 +83,6 @@ const login = async (req, res) => {
         
 
         res.json({ msg: "Welcome", token: token });
-    });
 }
 
 module.exports = {
