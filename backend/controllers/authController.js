@@ -4,7 +4,15 @@ const jwt = require ("jsonwebtoken");
 const express = require("express");
 const session = require ("express-session");
 const app = express();
-
+const secretKey = "your-secret-key";
+// confi encodage data
+app.use(
+    session({
+        secret: secretKey,
+        resave: false,
+        saveUninitialized: true
+    })
+);
 const register = async (req, res) => {
 
     console.log("here sign up");
@@ -41,13 +49,7 @@ const register = async (req, res) => {
 };
 
 
-// confi encodage data
-const  secretKey = "encodade data for  jwt";
-app.use(
-    session({
-        secret:secretKey,
-    })
-)
+
 
 const login = async (req, res) => {
     let user = req.body;
@@ -61,7 +63,7 @@ const login = async (req, res) => {
     
 
         // Compare passwords
-        const pwdResult = doc.comparePassword(user.password);
+        const pwdResult =  doc.comparePassword(user.password);
    
         // Passwords do not match
         if (!pwdResult) {
@@ -75,7 +77,8 @@ const login = async (req, res) => {
             role: doc.role,
             email: doc.email,
             gender: doc.gender,
-            phoneNumber: doc.phoneNumber
+            phoneNumber: doc.phoneNumber,
+           
         };
 
         const token = jwt.sign(userToSend, secretKey, { expiresIn: '1h' });
