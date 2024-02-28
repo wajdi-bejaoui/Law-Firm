@@ -5,7 +5,15 @@ const express = require("express");
 const session = require ("express-session");
 const { StatusCodes } = require('http-status-codes');
 const app = express();
-
+const secretKey = "your-secret-key";
+// confi encodage data
+app.use(
+    session({
+        secret: secretKey,
+        resave: false,
+        saveUninitialized: true
+    })
+);
 const register = async (req, res) => {
 
     console.log("here sign up");
@@ -42,13 +50,7 @@ const register = async (req, res) => {
 };
 
 
-// confi encodage data
-const  secretKey = "encodade data for  jwt";
-app.use(
-    session({
-        secret:secretKey,
-    })
-)
+
 
 const login = async (req, res) => {
     let user = req.body;
@@ -85,6 +87,7 @@ const login = async (req, res) => {
 
         res.json({ msg: "Welcome", token: token });
 }
+
 
 module.exports = {
     register,
