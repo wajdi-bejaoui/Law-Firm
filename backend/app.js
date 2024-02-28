@@ -1,3 +1,5 @@
+require('dotenv').config();
+require('express-async-errors');
 //import express module
 const express = require("express");
 //importation
@@ -8,6 +10,7 @@ const bcrypt = require ("bcrypt");
 const jwt = require ("jsonwebtoken");
 const session = require ("express-session");
 const authRouter = require("./routes/authRoutes")
+const reviewRouter = require("./routes/reviewRoutes")
 //import mongoose module
 //const mongoose = require("mongoose");
 //import body-parser module
@@ -23,12 +26,12 @@ app.use(express.json());
 // Enable CORS for all routes
 app.use(cors());
 //connection bd
-mongoose.connect('mongodb://localhost:27017/LawExpert', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// mongoose.connect('mongodb://localhost:27017/LawExpert', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
-// mongoose.connect('mongodb+srv://wajdibejaoui26:1234@cluster0.azs73u3.mongodb.net/LawExpert?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://wajdibejaoui26:1234@cluster0.azs73u3.mongodb.net/LawExpert?retryWrites=true&w=majority')
 
 
 
@@ -46,6 +49,9 @@ const User= require("./Models/user");
 
 //of sign up and login
 app.use('/users', authRouter);
+app.use('/api/v1/reviews', reviewRouter);
+
+
 
 
 

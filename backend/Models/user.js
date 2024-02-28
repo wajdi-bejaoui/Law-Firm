@@ -12,10 +12,25 @@ const userSchema = mongoose.Schema({
         password : String,
         confirmPassword:String,
         email:String,
-        role : String
-    
-    
-});
+        role : String,
+        averageRating: {
+                type: Number,
+                default: 0,
+              },
+        numOfReviews: {
+                type: Number,
+                default: 0,
+              }
+},
+{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+userSchema.virtual('reviews', {
+        ref: 'Review',
+        localField: '_id',
+        foreignField: 'lawyer',
+        justOne: false,
+      });
 
 userSchema.pre('save', async function () {
         // const salt = await bcrypt.genSalt(10)

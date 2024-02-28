@@ -72,12 +72,13 @@ const login = async (req, res) => {
         let userToSend = {
             userName: doc.userName,
             fullName: doc.fullName,
-            id: doc.id,
+            id: doc._id,
             role: doc.role,
             email: doc.email,
             gender: doc.gender,
             phoneNumber: doc.phoneNumber
         };
+        console.log(userToSend)
 
         const token = jwt.sign(userToSend, secretKey, { expiresIn: '1h' });
         
