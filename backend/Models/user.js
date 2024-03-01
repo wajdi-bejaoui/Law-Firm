@@ -12,8 +12,8 @@ const userSchema = mongoose.Schema({
         password : String,
         confirmPassword:String,
         email:String,
-        role : String
-    
+        role : String,
+        avatar : String
     
 });
 

@@ -8,6 +8,7 @@ const bcrypt = require ("bcrypt");
 const jwt = require ("jsonwebtoken");
 const session = require ("express-session");
 const authRouter = require("./routes/authRoutes")
+
 //import mongoose module
 //const mongoose = require("mongoose");
 //import body-parser module
@@ -46,6 +47,7 @@ const User= require("./Models/user");
 
 //of sign up and login
 app.use('/users', authRouter);
+
 
 
 

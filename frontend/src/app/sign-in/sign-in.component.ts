@@ -48,6 +48,8 @@ export class SignInComponent implements OnInit{
         } else {
           // Vérifier si le token est présent dans la réponse
           if (response.token) {
+            console.log("here token",response.token);
+            
             // Stocker le token JWT dans sessionStorage
             sessionStorage.setItem("jwt", response.token);
   
@@ -57,9 +59,9 @@ export class SignInComponent implements OnInit{
   
             // Rediriger en fonction du rôle de l'utilisateur
             if (user.role === "lawyer") {
-              this.route.navigate(['']); // Utiliser la route admin appropriée
+              this.route.navigate(['profile']); // Utiliser la route admin appropriée
             } else {
-              this.route.navigate(['about']); // Utiliser la route utilisateur appropriée
+              this.route.navigate(['profile']); // Utiliser la route utilisateur appropriée
             }
           } else {
             // Aucun token dans la réponse, afficher un message d'erreur

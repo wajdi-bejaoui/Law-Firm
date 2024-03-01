@@ -31,7 +31,7 @@
 
 
         <div class="rd-navbar-btn-wrap"  *ngIf="isConnected()"><a class="button button-smaller button-primary-outline" href="#">Appointment</a></div>
-        <div class="rd-navbar-btn-wrap" *ngIf="isConnected()"><a class="button button-smaller button-primary-outline" >{{fullName}} {{userName}}</a></div>
+        <div class="rd-navbar-btn-wrap" *ngIf="isConnected()"><a class="button button-smaller button-primary-outline" href="profile" >{{fullName}} {{userName}}</a></div>
 
 
         <div class="rd-navbar-btn-wrap" *ngIf="isConnected()" (click)="logut()"><a class="button button-smaller button-primary-outline" >Logout</a></div>

@@ -1,13 +1,13 @@
-<app-banner banner="Sign Up"></app-banner>
+<app-banner banner="{{title}}"></app-banner>
 <div class="container">
-    <h1 class="form-title">Registration</h1>
+    <h1 class="form-title" >{{title}}</h1>
     <div class="alert alert-danger" role="alert">
       {{errormsg}}
     </div>
 
-    <form action="#" [formGroup]="FormInput">
+    <form action="#" [formGroup]="FormInput" >
    
-      <div class="main-user-info">
+      <div class="main-user-info" >
         
         <div class="user-input-box">
           <label for="fullName">Full Name</label>
@@ -15,7 +15,7 @@
                   id="fullName"
                   name="fullName"
                   formControlName="fullName"
-                  placeholder="Enter Full Name"/>
+                  placeholder="Enter Full Name"   [(ngModel)]="users.fullName"/>
                   <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['fullName'].hasError('required')">
                     fullName is required
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -27,7 +27,7 @@
                   id="username"
                   name="userName"
                   formControlName="userName"
-                  placeholder="Enter Username"/>
+                  placeholder="Enter Username" [(ngModel)]="users.userName"/>
                   <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['userName'].hasError('required')">
                     Username is required.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -39,7 +39,7 @@
                   id="email"
                   name="email"
                   formControlName="email"
-                  placeholder="Enter Email"/>
+                  placeholder="Enter Email" [(ngModel)]="users.email"/>
                   <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['email'].hasError('required')">
                     Email address is required.                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
@@ -53,7 +53,7 @@
                   id="phoneNumber"
                   name="phoneNumber"
                   formControlName="phoneNumber"
-                  placeholder="Enter Phone Number"/>
+                  placeholder="Enter Phone Number" [(ngModel)]="users.phoneNumber"/>
                   <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['phoneNumber'].hasError('required')">
                     Phone number is required.                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
@@ -110,8 +110,7 @@
             <label for="male">Male</label>
             <input type="radio" name="gender" id="female" value="female" formControlName="gender">
             <label for="female">Female</label>
-            <input type="radio" name="gender" id="other" value="other" formControlName="gender">
-            <label for="other">Other</label>
+         
         
             <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['gender'].hasError('required')">
                 Please select a genre.              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -123,13 +122,29 @@
             </div>
           </div>
       </div>
+      <!-- <div class="user-input-box">
+        <label for="role">Role</label>
+      
+                <select class="form-select" aria-label="Default select example" id="role"
+                name="role"
+                formControlName="role"
+                [(ngModel)]="users.role">
+                  <option selected>lawyer</option>
+                  <option value="1">lawyer</option>
+                  <option value="2">client</option>
+                </select>
+                <div class="alert alert-warning alert-dismissible fade show" *ngIf="!FormInput.pristine && FormInput.controls['role'].hasError('required')">
+                Role is required.                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+             
+      </div> -->
       <div class="form-submit-btn">
 
-  <input type="file" value="Register Avatar" (change)="onImageSelected($event)" >
-  <img [src]="imagePreview" alt="">
+  <input type="file" value="Register Avatar"  name="img" (change)="onImageSelected($event)"  >
+  <img [src]="imagePreview"  alt="">
       </div>
       <div class="form-submit-btn">
-        <input type="submit" value="Register" (click)="signup()" [disabled]="FormInput.invalid">
+        <input type="submit" [value]="title" (click)="signup()" [disabled]="FormInput.invalid">
       </div>
     </form>
   </div>

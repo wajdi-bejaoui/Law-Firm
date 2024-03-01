@@ -4,6 +4,9 @@ const jwt = require ("jsonwebtoken");
 const express = require("express");
 const session = require ("express-session");
 const { StatusCodes } = require('http-status-codes');
+const { log } = require("util");
+const multer = require("multer");
+const path = require ("path");
 const app = express();
 const secretKey = "your-secret-key";
 // confi encodage data
@@ -13,42 +16,54 @@ app.use(
         resave: false,
         saveUninitialized: true
     })
-);
-const register = async (req, res) => {
+);// Middleware to check and validate JWT
 
-    console.log("here sign up");
-    try {
-        // Vérifiez si l'e-mail existe déjà dans la base de données
-        const existingUser = await User.findOne({ email: req.body.email });
-        if (existingUser) {
-            return res.json({ msg: 'E-mail already exists' });
+
+
+ 
+  
+ 
+  
+ 
+ 
+ const register =  async (req, res) => {
+     console.log("here sign up");
+     console.log("tt", req.body);
+     try {
+         // Check if the email already exists in the database
+         const existingUser = await User.findOne({ email: req.body.email });
+         if (existingUser) {
+             return res.json({ msg: 'E-mail already exists' });
+         }
+
+         // Create the avatar URL using the uploaded file
+         if (req.file && req.file.filename) {
+         // Create a new user with the hashed password
+         const newUser = new User({
+             email: req.body.email,
+             password: req.body.password,
+             userName: req.body.userName,
+             fullName: req.body.fullName,
+             phoneNumber: req.body.phoneNumber,
+             gender: req.body.gender,
+             role:req.body.role,
+             avatar: `http://localhost:3000/images/${req.file.filename}`
+             // ... other fields of the model
+         });
+ 
+         // Save the user to the database
+         await newUser.save();
         }
-
-        let obj = req.body;
-
-
-        // Création d'un nouvel utilisateur avec le mot de passe hashé
-        const newUser = new User({
-            email: req.body.email,
-            password: req.body.password,
-            userName : req.body.userName,
-            fullName : req.body.fullName,
-            phoneNumber : req.body.phoneNumber,
-            gender : req.body.gender
-
-            // ... autres champs du modèle
-        });
-
-        // Sauvegarde de l'utilisateur dans la base de données
-        await newUser.save();
-
-        res.json({ msg: 'Registered successfully' });
-    } catch (error) {
-        console.error('Error during user registration:', error);
-        res.json({ msg: 'Internal server error' });
-    }
-};
-
+        else {
+          return res.json({ msg: 'No file provided or filename is undefined' });
+      }
+         res.json({ msg: 'Registered successfully' });
+     } catch (error) {
+         console.error('Error during user registration:', error);
+         res.json({ msg: 'Internal server error' });
+     }
+ };
+ 
 
 
 
@@ -74,7 +89,7 @@ const login = async (req, res) => {
         let userToSend = {
             userName: doc.userName,
             fullName: doc.fullName,
-            id: doc.id,
+            id: doc._id,
             role: doc.role,
             email: doc.email,
             gender: doc.gender,

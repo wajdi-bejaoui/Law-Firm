@@ -9,6 +9,7 @@ import { TypographyComponent } from './typography/typography.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { LatesNewsComponent } from './lates-news/lates-news.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: "header", component:HeaderComponent},
@@ -18,8 +19,11 @@ const routes: Routes = [
   {path:"contact", component:ContactComponent},
   {path:"typography", component:TypographyComponent},
   {path:"signup",component:SignUpComponent},
+  {path:"updateProfile/:id",component:SignUpComponent},
+
   {path:"signin", component:SignInComponent},
   {path:"latesnews", component:LatesNewsComponent},
+  {path:"profile",component:ProfileComponent}
 ];
 
 @NgModule({

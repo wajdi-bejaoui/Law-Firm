@@ -16,6 +16,7 @@ import { BannerComponent } from './banner/banner.component';
 import { LatesNewsComponent } from './lates-news/lates-news.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ExpertsLawersComponent } from './experts-lawers/experts-lawers.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ExpertsLawersComponent } from './experts-lawers/experts-lawers.componen
     BannerComponent,
     LatesNewsComponent,
     TestimonialsComponent,
-    ExpertsLawersComponent
+    ExpertsLawersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
