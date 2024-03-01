@@ -95,6 +95,7 @@ const login = async (req, res) => {
             gender: doc.gender,
             phoneNumber: doc.phoneNumber
         };
+        console.log(userToSend)
 
         const token = jwt.sign(userToSend, secretKey, { expiresIn: '1h' });
         

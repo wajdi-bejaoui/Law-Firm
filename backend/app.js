@@ -1,3 +1,5 @@
+require('dotenv').config();
+require('express-async-errors');
 //import express module
 const express = require("express");
 //importation
@@ -8,6 +10,10 @@ const bcrypt = require ("bcrypt");
 const jwt = require ("jsonwebtoken");
 const session = require ("express-session");
 const authRouter = require("./routes/authRoutes")
+
+
+
+const reviewRouter = require("./routes/reviewRoutes")
 
 //import mongoose module
 //const mongoose = require("mongoose");
@@ -47,6 +53,9 @@ const User= require("./Models/user");
 
 //of sign up and login
 app.use('/users', authRouter);
+app.use('/api/v1/reviews', reviewRouter);
+
+
 
 
 
