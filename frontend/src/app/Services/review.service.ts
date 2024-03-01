@@ -25,9 +25,9 @@ export class ReviewService {
     return this.httpclient.get<{msg:any}>(`${this.reviewUrl}/lawyer/${lawyerId}`, this.httpOptions);
   }
 
-  getAllLawyers(): Observable<{lawyers:any}> {
+  getAllLawyers(): Observable<any[]> {
   
-    return this.httpclient.get<{lawyers:any}>(`${this.reviewUrl}/lawyers`);
+    return this.httpclient.get<any[]>(`${this.reviewUrl}/lawyers`);
   }
 
   constructor(private httpclient: HttpClient) { }

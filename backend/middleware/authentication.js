@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const StatusCodes = require('http-status-codes')
 
-const isTokenValid = ( token ) => jwt.verify(token, process.env.JWT_SECRET);
+const isTokenValid = ( token ) => jwt.verify(token, "your-secret-key");
 
 
 const authenticateUser = async (req, res, next) => {
   let token;
+  console.log("here")
   // check header
   const authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith('Bearer')) {
@@ -16,14 +17,17 @@ const authenticateUser = async (req, res, next) => {
   // else if (req.cookies.token) {
   //   token = req.cookies.token;
   // }
+  console.log("here2")
 
   if (!token) {
     // throw new CustomError.UnauthenticatedError('Authentication invalid');
     return res.json({msg:"Authentication invalid"}).status(StatusCodes.UNAUTHORIZED);
   }
-  
+
+  console.log("here3")
+  console.log(token)
   try {
-    console.log(token)
+    console.log("here")
     const payload = await isTokenValid(token);
 
     console.log(payload)

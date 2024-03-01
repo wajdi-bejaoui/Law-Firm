@@ -92,7 +92,7 @@ const deleteReview = async (req, res) => {
 const getSingleLawyerReviews = async (req, res) => {
   const { id: lawyerId } = req.params;
   const reviews = await Review.find({ lawyer: lawyerId });
-  res.status(StatusCodes.OK).json({ reviews, count: reviews.length });
+  res.status(StatusCodes.OK).json({ reviews });
 };
 
 const getAllLawyer = async (req, res) => {

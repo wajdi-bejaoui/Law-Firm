@@ -26,7 +26,7 @@ const routes: Routes = [
   {path:"signin", component:SignInComponent},
   {path:"latesnews", component:LatesNewsComponent},
   {path:"profile",component:ProfileComponent},
-  {path:"lawyerProfile",component:LawyerProfileComponent},
+  {path:"lawyerProfile/:id",component:LawyerProfileComponent},
   {path:"lawyerList",component:ListLawyersComponent}
 
 ];
