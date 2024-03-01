@@ -10,6 +10,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { LatesNewsComponent } from './lates-news/lates-news.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LawyerProfileComponent } from './lawyer-profile/lawyer-profile.component';
+import { ListLawyersComponent } from './list-lawyers/list-lawyers.component';
 
 const routes: Routes = [
   {path: "header", component:HeaderComponent},
@@ -23,7 +25,10 @@ const routes: Routes = [
 
   {path:"signin", component:SignInComponent},
   {path:"latesnews", component:LatesNewsComponent},
-  {path:"profile",component:ProfileComponent}
+  {path:"profile",component:ProfileComponent},
+  {path:"lawyerProfile",component:LawyerProfileComponent},
+  {path:"lawyerList",component:ListLawyersComponent}
+
 ];
 
 @NgModule({

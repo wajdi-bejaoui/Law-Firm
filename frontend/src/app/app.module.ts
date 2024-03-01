@@ -17,6 +17,9 @@ import { LatesNewsComponent } from './lates-news/lates-news.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ExpertsLawersComponent } from './experts-lawers/experts-lawers.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LawyerProfileComponent } from './lawyer-profile/lawyer-profile.component';
+import { CommentComponent } from './comment/comment.component';
+import { ListLawyersComponent } from './list-lawyers/list-lawyers.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { ProfileComponent } from './profile/profile.component';
     LatesNewsComponent,
     TestimonialsComponent,
     ExpertsLawersComponent,
-    ProfileComponent
+    ProfileComponent,
+    LawyerProfileComponent,
+    CommentComponent,
+    ListLawyersComponent
   ],
   imports: [
     BrowserModule,

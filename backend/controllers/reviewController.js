@@ -95,6 +95,13 @@ const getSingleLawyerReviews = async (req, res) => {
   res.status(StatusCodes.OK).json({ reviews, count: reviews.length });
 };
 
+const getAllLawyer = async (req, res) => {
+  const lawyers = await User.find({role : "lawyer"})
+  console.log(lawyers)
+
+  res.status(StatusCodes.OK).json({ lawyers });
+};
+
 module.exports = {
   createReview,
   getAllReviews,
@@ -102,4 +109,5 @@ module.exports = {
   updateReview,
   deleteReview,
   getSingleLawyerReviews,
+  getAllLawyer,
 };
