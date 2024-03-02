@@ -72,20 +72,22 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   const { id: reviewId } = req.params;
 
-  const review = await Review.findOne({ _id: reviewId });
+  // const review = await Review.findOne({ _id: reviewId });
+  const review = await Review.deleteOne({ _id: reviewId });
+
 
   if (!review) {
     res.status(StatusCodes.NOT_FOUND).json({ msg: `No review with id ${reviewId}`});
   }
 
   // checkPermissions(req.user, review.user);
-  try {
-    console.log(review)
+  // try {
+  //   console.log(review)
 
-    await review.remove();
-  }catch(error) {
-    res.json({ error });
-  }
+  //   await review.remove();
+  // }catch(error) {
+  //   res.json({ error });
+  // }
   res.status(StatusCodes.OK).json({ msg: 'Success! Review removed' });
 };
 

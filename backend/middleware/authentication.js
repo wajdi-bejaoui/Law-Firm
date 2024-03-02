@@ -12,11 +12,6 @@ const authenticateUser = async (req, res, next) => {
     token = authHeader.split(' ')[1];
   }
 
-  // // check cookies
-  // else if (req.cookies.token) {
-  //   token = req.cookies.token;
-  // }
-
   if (!token) {
     // throw new CustomError.UnauthenticatedError('Authentication invalid');
     return res.json({msg:"Authentication invalid"}).status(StatusCodes.UNAUTHORIZED);
@@ -28,11 +23,6 @@ const authenticateUser = async (req, res, next) => {
 
     console.log(payload)
 
-    // Attach the user and his permissions to the req object
-    // req.user = {
-    //   userId: payload.user.userId,
-    //   role: payload.user.role,
-    // };
     req.user = {
       id: payload.id,
       role: payload.role
