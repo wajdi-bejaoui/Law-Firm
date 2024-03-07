@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../Services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
+import { Token } from '@angular/compiler';
 
 
 @Component({
@@ -14,9 +16,19 @@ FormInput!:FormGroup;
 password1: string = '';
 password2: string = '';
 errormsg:String="";
+title:string="Registration"
+idUser : any;
 imagePreview: any;
-  constructor( private FB:FormBuilder, private userservice: UserService, private route :Router){}
+users:any={};
+  constructor( private FB:FormBuilder, private userservice: UserService, private route :Router,private activateRoute:ActivatedRoute){}
+ 
+  decodeToken(tokenObject: any): any {
+    // Assurez-vous que 'token' est une chaîne de caractères
+    return jwt_decode(tokenObject);
+  }
 ngOnInit(): void {
+  
+
   this.FormInput = this.FB.group({
     fullName:['',[Validators.required,Validators.minLength(3)]],
     userName:['',[Validators.required,Validators.minLength(3)]],
@@ -35,10 +47,31 @@ ngOnInit(): void {
     gender: ['', [
       Validators.required,
       Validators.pattern(/^(male|female|other)$/i),  // Vous pouvez ajouter d'autres options si nécessaire
-    ]]
+    ]],
+    img:[''],
+    role:['']
   }) 
     
+
+  this.idUser = this.activateRoute.snapshot.paramMap.get('id');
+  console.log("here id", this.idUser);
+  
+  if(this.idUser){
+    this.title ="Update Profile";
+   this.userservice.getUserBydId(this.idUser).subscribe((
+    response)=>{
+      console.log("here token", response);
+      if (response) {
+       console.log("here doc",response.userFinded);
+this.users =response.userFinded;      }
+      
+    });
+    
+  }
+
 }
+
+
 passwordMatchValidator() {
   const password1 = this.FormInput.controls['password'].value;
   const password2 = this.FormInput.controls['confirmPassword'].value;
@@ -50,30 +83,30 @@ passwordMatchValidator() {
   }
 }
 signup() {
-  console.log("hhh", this.FormInput.value);
+  this.idUser = this.activateRoute.snapshot.paramMap.get('id');
+  if(this.idUser){
+this.userservice.updateProfile(this.FormInput.value).subscribe(
+  (doc)=>{
+    sessionStorage.removeItem("jwt");
+this.route.navigate(['signin'])    
+  }
+)
+  }else{
 
-  this.userservice.signup(this.FormInput.value).subscribe(
+  this.userservice.signup(this.FormInput.value , this.FormInput.value.img).subscribe(
     (data: any) => {
       console.log('Sign up successful', data);
+      console.log("rr", this.FormInput.get('file')?.value);
       
       // Check if the response indicates success
       if (data.msg === 'Registered successfully') {
+        
         this.route.navigate(['signin']);
       } else {
         this.errormsg = 'Email aleardy exists';
       }
-    },
-    (error) => {
-      console.error('Error during signup:', error);
-      
-      // Handle specific error messages from the server
-      if (error.error && error.error.msg) {
-        this.errormsg = error.error.msg;
-      } else {
-        this.errormsg = 'An error occurred during signup. Please try again.';
-      }
     }
-  );
+  );}
 }
 
 onImageSelected(event: Event) {
@@ -87,11 +120,12 @@ onImageSelected(event: Event) {
     this.FormInput.updateValueAndValidity();
 
     const reader = new FileReader();
+    reader.readAsDataURL(file);
+
     reader.onload = () => {
       // Assuming this.imagePreview is a property to store the image preview
       this.imagePreview = reader.result as string;
     };
-    reader.readAsDataURL(file);
   } else {
     console.error('No file selected'); // Handle the case where no file is selected
   }

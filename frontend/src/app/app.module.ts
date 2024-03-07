@@ -16,6 +16,15 @@ import { BannerComponent } from './banner/banner.component';
 import { LatesNewsComponent } from './lates-news/lates-news.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ExpertsLawersComponent } from './experts-lawers/experts-lawers.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LawyerProfileComponent } from './lawyer-profile/lawyer-profile.component';
+import { CommentComponent } from './review/comment/comment.component';
+import { ListLawyersComponent } from './list-lawyers/list-lawyers.component';
+import { StarRatingComponent } from './review/star-rating/star-rating.component';
+import { ChangeRatingComponent } from './review/change-rating/change-rating.component';
+import { ListQuestionsComponent } from './list-questions/list-questions.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
+import { ConsultQuestionComponent } from './consult-question/consult-question.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +40,16 @@ import { ExpertsLawersComponent } from './experts-lawers/experts-lawers.componen
     BannerComponent,
     LatesNewsComponent,
     TestimonialsComponent,
-    ExpertsLawersComponent
+    ExpertsLawersComponent,
+    ProfileComponent,
+    LawyerProfileComponent,
+    CommentComponent,
+    ListLawyersComponent,
+    StarRatingComponent,
+    ChangeRatingComponent,
+    ListQuestionsComponent,
+    AddQuestionComponent,
+    ConsultQuestionComponent
   ],
   imports: [
     BrowserModule,

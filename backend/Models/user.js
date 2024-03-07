@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
         confirmPassword:String,
         email:String,
         role : String,
+
+        avatar : String,
+    
+
         averageRating: {
                 type: Number,
                 default: 0,
